@@ -5,28 +5,14 @@ from pylatexenc.latex2text import LatexNodes2Text
 import logging
 
 # Set up logging for debugging
-logging.basicConfig(filename=r'C:\\Temp\\latex_processing.log', level=logging.DEBUG,
+logging.basicConfig(filename=r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\logs\\latex_processing.log', level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s')
 
-# Function to clean LaTeX text using pylatexenc and manually handle certain symbols
+# Function to clean LaTeX text using pylatexenc
 def clean_latex_text(latex_string):
     logging.debug(f"Original LaTeX string: {latex_string}")
-    
-    # Convert LaTeX to readable text, preserving symbols
     latex_text = LatexNodes2Text().latex_to_text(latex_string)
-    
-    # Manually replace common LaTeX symbols with their Unicode equivalents
-    latex_text = latex_text.replace("\\cdot", "·")
-    latex_text = latex_text.replace("\\times", "×")
-    latex_text = latex_text.replace("\\div", "÷")
-    latex_text = latex_text.replace("\\pm", "±")
-    latex_text = latex_text.replace("\\approx", "≈")
-    latex_text = latex_text.replace("\\sqrt", "√")
-    latex_text = latex_text.replace("\\leq", "≤")
-    latex_text = latex_text.replace("\\geq", "≥")
-    latex_text = latex_text.replace("\\Omega", "Ω")
-    
-    logging.debug(f"Cleaned LaTeX string (after decoding and symbol replacements): {latex_text}")
+    logging.debug(f"Cleaned LaTeX string: {latex_text}")
     return latex_text
 
 # Function to clean up hidden characters
@@ -45,13 +31,7 @@ def split_latex_equations(latex_string):
     return [eq.strip() for eq in equations if eq.strip()]  # Filter out empty strings
 
 # Ensure that the Python script is pulling input directly from the document
-doc_path = r'C:\\Users\\latou\\Desktop\\LatexTestWord.docx'
-output_path = r'C:\\Temp\\latex_output.txt'  # Simpler path to write output
-
-# Ensure the output directory exists
-if not os.path.exists('C:\\Temp'):
-    os.makedirs('C:\\Temp')
-    logging.debug("Created output directory: C:\\Temp")
+doc_path = r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\LatexTestWord.docx'
 
 if not os.path.exists(doc_path):
     logging.error(f"Document not found: {doc_path}")
@@ -80,16 +60,12 @@ for eq in equations:
     cleaned_latex = clean_latex_text(eq)
     results.append(cleaned_latex)
 
-# Join the results with newline characters
+# Join the results with newline characters and return the string for VBA to process
 final_output = '\n'.join(results)
 
-# Output the final cleaned LaTeX to the temp file
-try:
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(final_output)
-        logging.debug(f"Temp file successfully written: {output_path}")
-except Exception as e:
-    logging.error(f"Failed to write temp file: {str(e)}")
+# Output the final cleaned LaTeX directly (for VBA to capture)
+with open(r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_output.txt', 'w') as f:
+    f.write(final_output)
 
-logging.debug(f"Final LaTeX/MathML results written to file: {final_output}")
+logging.debug(f"Final LaTeX/MathML results: {final_output}")
 logging.debug("Python script finished.")
