@@ -5,7 +5,7 @@ from pylatexenc.latex2text import LatexNodes2Text
 import logging
 
 # Set up logging for debugging
-logging.basicConfig(filename=r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\logs\\latex_processing.log', level=logging.DEBUG,
+logging.basicConfig(filename=r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_processing.log', level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s')
 
 # Function to clean LaTeX text using pylatexenc
