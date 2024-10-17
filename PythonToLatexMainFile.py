@@ -5,14 +5,37 @@ from pylatexenc.latex2text import LatexNodes2Text
 import logging
 
 # Set up logging for debugging
-logging.basicConfig(filename=r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_processing.log', level=logging.DEBUG,
+log_file = r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_processing.log'
+max_log_size = 10000  # Max size in bytes
+max_log_lines = 100  # Maximum number of lines to keep
+
+logging.basicConfig(filename=log_file, level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s')
+
+
+def trim_log_file(log_file, max_size, max_lines):
+    """ Trim the log file if it exceeds max size or max lines """
+    if os.path.exists(log_file):
+        # Check if the log file exceeds the max size
+        if os.path.getsize(log_file) > max_size:
+            logging.debug("Log file size exceeded. Trimming the log file.")
+            with open(log_file, 'r') as f:
+                lines = f.readlines()
+
+            # Trim the log to the last max_lines lines
+            if len(lines) > max_lines:
+                lines = lines[-max_lines:]
+
+            # Write back the trimmed log
+            with open(log_file, 'w') as f:
+                f.writelines(lines)
+
 
 # Function to clean LaTeX text and manually handle fractions
 def clean_latex_text(latex_string):
     logging.debug(f"Original LaTeX string: {latex_string}")
 
-    # Manual replacements for common LaTeX symbols (keep \frac intact)
+    # Manual replacements for common LaTeX symbols (leave \frac intact for now)
     replacements = {
         r'\cdot': '·',      # Multiplication dot
         r'\times': '×',     # Multiplication cross
@@ -28,15 +51,19 @@ def clean_latex_text(latex_string):
     for latex_symbol, unicode_char in replacements.items():
         latex_string = latex_string.replace(latex_symbol, unicode_char)
 
-    # Ensure that fractions are preserved as \frac{numerator}{denominator}
-    # Convert all the rest of LaTeX except \frac{}{} using pylatexenc
+    # Leave \frac{}{} structure intact during pylatexenc processing
+    # Split \frac{...}{...} out before pylatexenc processing
+    latex_string = re.sub(r'\\frac{(.*?)}{(.*?)}', r'FRAC_START{\1}{\2}FRAC_END', latex_string)
+
+    # Convert the rest of the LaTeX text using pylatexenc
     latex_text = LatexNodes2Text().latex_to_text(latex_string)
 
-    # Replace any modified \frac text back to LaTeX fraction format
-    latex_text = re.sub(r'@@FRAC@@(.*?)@@END_FRAC@@', r'\\frac{\1}', latex_text)
+    # Restore fractions after pylatexenc conversion
+    latex_text = latex_text.replace('FRAC_START', '\\frac').replace('FRAC_END', '')
 
     logging.debug(f"Cleaned LaTeX string after restoring fractions: {latex_text}")
     return latex_text
+
 
 # Function to clean up hidden characters
 def clean_latex_input(latex_string):
@@ -47,11 +74,13 @@ def clean_latex_input(latex_string):
     logging.debug(f"Cleaned hidden characters from LaTeX input: {latex_string}")
     return latex_string
 
+
 # Function to split the continuous LaTeX string into individual equations
 def split_latex_equations(latex_string):
     equations = re.split(r'(?<!\\)\$', latex_string)  # Split by $ symbols while avoiding escaped \$ signs
     logging.debug(f"Split equations: {equations}")
     return [eq.strip() for eq in equations if eq.strip()]  # Filter out empty strings
+
 
 # Ensure that the Python script is pulling input directly from the document
 doc_path = r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\LatexTestWord.docx'
@@ -96,3 +125,6 @@ except Exception as e:
     logging.error(f"Error writing to file: {e}")
 
 logging.debug("Python script finished.")
+
+# Trim the log file if it exceeds the size or line limit
+trim_log_file(log_file, max_log_size, max_log_lines)
