@@ -8,11 +8,34 @@ import logging
 logging.basicConfig(filename=r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_processing.log', level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s')
 
-# Function to clean LaTeX text using pylatexenc
+# Function to clean LaTeX text and manually handle fractions
 def clean_latex_text(latex_string):
     logging.debug(f"Original LaTeX string: {latex_string}")
+
+    # Manual replacements for common LaTeX symbols (keep \frac intact)
+    replacements = {
+        r'\cdot': '·',      # Multiplication dot
+        r'\times': '×',     # Multiplication cross
+        r'\div': '÷',       # Division symbol
+        r'\pm': '±',        # Plus-minus
+        r'\approx': '≈',    # Approximately equal
+        r'\leq': '≤',       # Less than or equal to
+        r'\geq': '≥',       # Greater than or equal to
+        r'\sqrt': '√',      # Square root
+    }
+
+    # Replace LaTeX symbols with Unicode equivalents
+    for latex_symbol, unicode_char in replacements.items():
+        latex_string = latex_string.replace(latex_symbol, unicode_char)
+
+    # Ensure that fractions are preserved as \frac{numerator}{denominator}
+    # Convert all the rest of LaTeX except \frac{}{} using pylatexenc
     latex_text = LatexNodes2Text().latex_to_text(latex_string)
-    logging.debug(f"Cleaned LaTeX string: {latex_text}")
+
+    # Replace any modified \frac text back to LaTeX fraction format
+    latex_text = re.sub(r'@@FRAC@@(.*?)@@END_FRAC@@', r'\\frac{\1}', latex_text)
+
+    logging.debug(f"Cleaned LaTeX string after restoring fractions: {latex_text}")
     return latex_text
 
 # Function to clean up hidden characters
@@ -32,6 +55,7 @@ def split_latex_equations(latex_string):
 
 # Ensure that the Python script is pulling input directly from the document
 doc_path = r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\LatexTestWord.docx'
+output_file_path = r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_output.txt'  # Corrected output path
 
 if not os.path.exists(doc_path):
     logging.error(f"Document not found: {doc_path}")
@@ -60,12 +84,15 @@ for eq in equations:
     cleaned_latex = clean_latex_text(eq)
     results.append(cleaned_latex)
 
-# Join the results with newline characters and return the string for VBA to process
+# Join the results with newline characters and prepare the output string
 final_output = '\n'.join(results)
 
 # Output the final cleaned LaTeX directly (for VBA to capture)
-with open(r'C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_output.txt', 'w') as f:
-    f.write(final_output)
+try:
+    with open(output_file_path, 'w', encoding='utf-8') as f:
+        f.write(final_output)
+    logging.debug(f"Final LaTeX/MathML results written to {output_file_path}")
+except Exception as e:
+    logging.error(f"Error writing to file: {e}")
 
-logging.debug(f"Final LaTeX/MathML results: {final_output}")
 logging.debug("Python script finished.")
