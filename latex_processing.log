@@ -1,5 +1,11 @@
-2024-10-13 23:49:46,725 DEBUG Extracted LaTeX from Word document: 
-$V_E = I_E \cdot R_1$
+2024-10-17 00:12:55,059 DEBUG Original LaTeX string: y = e^{x^2 + \frac{1}{x}}
+2024-10-17 00:12:55,059 DEBUG Cleaned LaTeX string after restoring fractions: y = e^x^2 + \frac1x
+2024-10-17 00:12:55,059 DEBUG Original LaTeX string: z = x^{x^{x}}
+2024-10-17 00:12:55,060 DEBUG Cleaned LaTeX string after restoring fractions: z = x^x^x
+2024-10-17 00:12:55,061 DEBUG Final LaTeX/MathML results written to C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_output.txt
+2024-10-17 00:12:55,061 DEBUG Python script finished.
+2024-10-17 00:12:55,061 DEBUG Log file size exceeded. Trimming the log file.
+2024-10-17 00:13:20,032 DEBUG Extracted LaTeX from Word document: $V_E = I_E \cdot R_1$
 $V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$
 $V_C = V_{CC} - V_{RC}$
 $V_{CE} = V_C - V_E$
@@ -12,241 +18,83 @@ $\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$
 $\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$
 $Test=Yes2$
 
-2024-10-13 23:49:46,725 DEBUG Cleaned hidden characters from LaTeX input:  $V_E = I_E \cdot R_1$ $V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$ $V_C = V_{CC} - V_{RC}$ $V_{CE} = V_C - V_E$ $I_C = \frac{V_{RC}}{R_2}$ $I_E = I_C + I_B$ $I_B = \frac{I_C}{\beta}$ $V_B = V_E + V_{BE}$ $P = F \cdot d$ $\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$ $\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$ $Test=Yes2$ 
-2024-10-13 23:49:46,725 DEBUG Split equations: [' ', 'V_E = I_E \\cdot R_1', ' ', 'V_{RC} = I_C \\cdot R_2 = 9.77 \\, \\text{mA} \\cdot 470 \\, \\Omega \\approx 4.5 \\, \\text{V}', ' ', 'V_C = V_{CC} - V_{RC}', ' ', 'V_{CE} = V_C - V_E', ' ', 'I_C = \\frac{V_{RC}}{R_2}', ' ', 'I_E = I_C + I_B', ' ', 'I_B = \\frac{I_C}{\\beta}', ' ', 'V_B = V_E + V_{BE}', ' ', 'P = F \\cdot d', ' ', '\\alpha, \\, \\beta, \\, \\gamma, \\, \\delta, \\, \\epsilon, \\, \\phi, \\, \\omega', ' ', '\\cdot, \\, \\times, \\, \\div, \\, \\pm, \\, \\approx, \\, \\sqrt{x}, \\, \\leq, \\, \\geq', ' ', 'Test=Yes2', ' ']
-2024-10-13 23:49:46,725 DEBUG Original LaTeX string: V_E = I_E \cdot R_1
-2024-10-13 23:49:46,730 DEBUG Cleaned LaTeX string after restoring fractions: V_E = I_E · R_1
-2024-10-13 23:49:46,730 DEBUG Original LaTeX string: V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}
-2024-10-13 23:49:46,731 DEBUG Cleaned LaTeX string after restoring fractions: V_RC = I_C · R_2 = 9.77   mA · 470   \u03a9\u2248 4.5   V
-2024-10-13 23:49:46,731 DEBUG Original LaTeX string: V_C = V_{CC} - V_{RC}
-2024-10-13 23:49:46,731 DEBUG Cleaned LaTeX string after restoring fractions: V_C = V_CC - V_RC
-2024-10-13 23:49:46,731 DEBUG Original LaTeX string: V_{CE} = V_C - V_E
-2024-10-13 23:49:46,731 DEBUG Cleaned LaTeX string after restoring fractions: V_CE = V_C - V_E
-2024-10-13 23:49:46,731 DEBUG Original LaTeX string: I_C = \frac{V_{RC}}{R_2}
-2024-10-13 23:49:46,732 DEBUG Cleaned LaTeX string after restoring fractions: I_C = @@FRAC@@V_RCR_2@@END_FRAC@@
-2024-10-13 23:49:46,732 DEBUG Original LaTeX string: I_E = I_C + I_B
-2024-10-13 23:49:46,732 DEBUG Cleaned LaTeX string after restoring fractions: I_E = I_C + I_B
-2024-10-13 23:49:46,732 DEBUG Original LaTeX string: I_B = \frac{I_C}{\beta}
-2024-10-13 23:49:46,732 DEBUG Cleaned LaTeX string after restoring fractions: I_B = @@FRAC@@I_C\u03b2@@END_FRAC@@
-2024-10-13 23:49:46,732 DEBUG Original LaTeX string: V_B = V_E + V_{BE}
-2024-10-13 23:49:46,733 DEBUG Cleaned LaTeX string after restoring fractions: V_B = V_E + V_BE
-2024-10-13 23:49:46,733 DEBUG Original LaTeX string: P = F \cdot d
-2024-10-13 23:49:46,733 DEBUG Cleaned LaTeX string after restoring fractions: P = F · d
-2024-10-13 23:49:46,733 DEBUG Original LaTeX string: \alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega
-2024-10-13 23:49:46,733 DEBUG Cleaned LaTeX string after restoring fractions: \u03b1,   \u03b2,   \u03b3,   \u03b4,   \u03f5,   \u03d5,   \u03c9
-2024-10-13 23:49:46,734 DEBUG Original LaTeX string: \cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq
-2024-10-13 23:49:46,734 DEBUG Cleaned LaTeX string after restoring fractions: ·,   ×,   ÷,   ±,   \u2248,   \u221ax,   \u2264,   \u2265
-2024-10-13 23:49:46,734 DEBUG Original LaTeX string: Test=Yes2
-2024-10-13 23:49:46,734 DEBUG Cleaned LaTeX string after restoring fractions: Test=Yes2
-2024-10-13 23:49:46,735 DEBUG Final LaTeX/MathML results written to C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_output.txt
-2024-10-13 23:49:46,735 DEBUG Python script finished.
-2024-10-14 00:15:50,800 DEBUG Extracted LaTeX from Word document: 
-$V_E = I_E \cdot R_1$
-$V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$
-$V_C = V_{CC} - V_{RC}$
-$V_{CE} = V_C - V_E$
-$I_C = \frac{V_{RC}}{R_2}$
-$I_E = I_C + I_B$
-$I_B = \frac{I_C}{\beta}$
-$V_B = V_E + V_{BE}$
-$P = F \cdot d$
-$\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$
-$\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$
-$Test=Yes2$
+% **Complex Nested Fractions**
+$I_N = \frac{\frac{V_{RC}}{R_2}}{\frac{V_E}{R_1}}$
+$P_{out} = \frac{\frac{F \cdot d}{T}}{\frac{I_E}{t}}$
 
-2024-10-14 00:15:50,801 DEBUG Cleaned hidden characters from LaTeX input:  $V_E = I_E \cdot R_1$ $V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$ $V_C = V_{CC} - V_{RC}$ $V_{CE} = V_C - V_E$ $I_C = \frac{V_{RC}}{R_2}$ $I_E = I_C + I_B$ $I_B = \frac{I_C}{\beta}$ $V_B = V_E + V_{BE}$ $P = F \cdot d$ $\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$ $\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$ $Test=Yes2$ 
-2024-10-14 00:15:50,801 DEBUG Split equations: [' ', 'V_E = I_E \\cdot R_1', ' ', 'V_{RC} = I_C \\cdot R_2 = 9.77 \\, \\text{mA} \\cdot 470 \\, \\Omega \\approx 4.5 \\, \\text{V}', ' ', 'V_C = V_{CC} - V_{RC}', ' ', 'V_{CE} = V_C - V_E', ' ', 'I_C = \\frac{V_{RC}}{R_2}', ' ', 'I_E = I_C + I_B', ' ', 'I_B = \\frac{I_C}{\\beta}', ' ', 'V_B = V_E + V_{BE}', ' ', 'P = F \\cdot d', ' ', '\\alpha, \\, \\beta, \\, \\gamma, \\, \\delta, \\, \\epsilon, \\, \\phi, \\, \\omega', ' ', '\\cdot, \\, \\times, \\, \\div, \\, \\pm, \\, \\approx, \\, \\sqrt{x}, \\, \\leq, \\, \\geq', ' ', 'Test=Yes2', ' ']
-2024-10-14 00:15:50,801 DEBUG Original LaTeX string: V_E = I_E \cdot R_1
-2024-10-14 00:15:50,805 DEBUG Cleaned LaTeX string after restoring fractions: V_E = I_E · R_1
-2024-10-14 00:15:50,805 DEBUG Original LaTeX string: V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}
-2024-10-14 00:15:50,806 DEBUG Cleaned LaTeX string after restoring fractions: V_RC = I_C · R_2 = 9.77   mA · 470   \u03a9\u2248 4.5   V
-2024-10-14 00:15:50,806 DEBUG Original LaTeX string: V_C = V_{CC} - V_{RC}
-2024-10-14 00:15:50,806 DEBUG Cleaned LaTeX string after restoring fractions: V_C = V_CC - V_RC
-2024-10-14 00:15:50,806 DEBUG Original LaTeX string: V_{CE} = V_C - V_E
-2024-10-14 00:15:50,806 DEBUG Cleaned LaTeX string after restoring fractions: V_CE = V_C - V_E
-2024-10-14 00:15:50,806 DEBUG Original LaTeX string: I_C = \frac{V_{RC}}{R_2}
-2024-10-14 00:15:50,807 DEBUG Cleaned LaTeX string after restoring fractions: I_C = @@FRAC@@V_RCR_2@@END_FRAC@@
-2024-10-14 00:15:50,807 DEBUG Original LaTeX string: I_E = I_C + I_B
-2024-10-14 00:15:50,807 DEBUG Cleaned LaTeX string after restoring fractions: I_E = I_C + I_B
-2024-10-14 00:15:50,807 DEBUG Original LaTeX string: I_B = \frac{I_C}{\beta}
-2024-10-14 00:15:50,807 DEBUG Cleaned LaTeX string after restoring fractions: I_B = @@FRAC@@I_C\u03b2@@END_FRAC@@
-2024-10-14 00:15:50,807 DEBUG Original LaTeX string: V_B = V_E + V_{BE}
-2024-10-14 00:15:50,808 DEBUG Cleaned LaTeX string after restoring fractions: V_B = V_E + V_BE
-2024-10-14 00:15:50,808 DEBUG Original LaTeX string: P = F \cdot d
-2024-10-14 00:15:50,808 DEBUG Cleaned LaTeX string after restoring fractions: P = F · d
-2024-10-14 00:15:50,808 DEBUG Original LaTeX string: \alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega
-2024-10-14 00:15:50,808 DEBUG Cleaned LaTeX string after restoring fractions: \u03b1,   \u03b2,   \u03b3,   \u03b4,   \u03f5,   \u03d5,   \u03c9
-2024-10-14 00:15:50,808 DEBUG Original LaTeX string: \cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq
-2024-10-14 00:15:50,809 DEBUG Cleaned LaTeX string after restoring fractions: ·,   ×,   ÷,   ±,   \u2248,   \u221ax,   \u2264,   \u2265
-2024-10-14 00:15:50,809 DEBUG Original LaTeX string: Test=Yes2
-2024-10-14 00:15:50,809 DEBUG Cleaned LaTeX string after restoring fractions: Test=Yes2
-2024-10-14 00:15:50,809 DEBUG Final LaTeX/MathML results written to C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_output.txt
-2024-10-14 00:15:50,809 DEBUG Python script finished.
-2024-10-14 00:23:27,130 DEBUG Extracted LaTeX from Word document: 
-$V_E = I_E \cdot R_1$
-$V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$
-$V_C = V_{CC} - V_{RC}$
-$V_{CE} = V_C - V_E$
-$I_C = \frac{V_{RC}}{R_2}$
-$I_E = I_C + I_B$
-$I_B = \frac{I_C}{\beta}$
-$V_B = V_E + V_{BE}$
-$P = F \cdot d$
-$\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$
-$\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$
-$Test=Yes2$
+% **Integral Expressions**
+$\int_0^\infty x^2 \, dx$
+$\int_a^b f(x) \, dx = F(b) - F(a)$
+$A = \int_0^T v(t) \, dt$
 
-2024-10-14 00:23:27,131 DEBUG Cleaned hidden characters from LaTeX input:  $V_E = I_E \cdot R_1$ $V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$ $V_C = V_{CC} - V_{RC}$ $V_{CE} = V_C - V_E$ $I_C = \frac{V_{RC}}{R_2}$ $I_E = I_C + I_B$ $I_B = \frac{I_C}{\beta}$ $V_B = V_E + V_{BE}$ $P = F \cdot d$ $\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$ $\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$ $Test=Yes2$ 
-2024-10-14 00:23:27,131 DEBUG Split equations: [' ', 'V_E = I_E \\cdot R_1', ' ', 'V_{RC} = I_C \\cdot R_2 = 9.77 \\, \\text{mA} \\cdot 470 \\, \\Omega \\approx 4.5 \\, \\text{V}', ' ', 'V_C = V_{CC} - V_{RC}', ' ', 'V_{CE} = V_C - V_E', ' ', 'I_C = \\frac{V_{RC}}{R_2}', ' ', 'I_E = I_C + I_B', ' ', 'I_B = \\frac{I_C}{\\beta}', ' ', 'V_B = V_E + V_{BE}', ' ', 'P = F \\cdot d', ' ', '\\alpha, \\, \\beta, \\, \\gamma, \\, \\delta, \\, \\epsilon, \\, \\phi, \\, \\omega', ' ', '\\cdot, \\, \\times, \\, \\div, \\, \\pm, \\, \\approx, \\, \\sqrt{x}, \\, \\leq, \\, \\geq', ' ', 'Test=Yes2', ' ']
-2024-10-14 00:23:27,131 DEBUG Original LaTeX string: V_E = I_E \cdot R_1
-2024-10-14 00:23:27,135 DEBUG Cleaned LaTeX string after restoring fractions: V_E = I_E · R_1
-2024-10-14 00:23:27,135 DEBUG Original LaTeX string: V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}
-2024-10-14 00:23:27,136 DEBUG Cleaned LaTeX string after restoring fractions: V_RC = I_C · R_2 = 9.77   mA · 470   \u03a9\u2248 4.5   V
-2024-10-14 00:23:27,136 DEBUG Original LaTeX string: V_C = V_{CC} - V_{RC}
-2024-10-14 00:23:27,136 DEBUG Cleaned LaTeX string after restoring fractions: V_C = V_CC - V_RC
-2024-10-14 00:23:27,136 DEBUG Original LaTeX string: V_{CE} = V_C - V_E
-2024-10-14 00:23:27,137 DEBUG Cleaned LaTeX string after restoring fractions: V_CE = V_C - V_E
-2024-10-14 00:23:27,137 DEBUG Original LaTeX string: I_C = \frac{V_{RC}}{R_2}
-2024-10-14 00:23:27,137 DEBUG Cleaned LaTeX string after restoring fractions: I_C = @@FRAC@@V_RCR_2@@END_FRAC@@
-2024-10-14 00:23:27,137 DEBUG Original LaTeX string: I_E = I_C + I_B
-2024-10-14 00:23:27,137 DEBUG Cleaned LaTeX string after restoring fractions: I_E = I_C + I_B
-2024-10-14 00:23:27,137 DEBUG Original LaTeX string: I_B = \frac{I_C}{\beta}
-2024-10-14 00:23:27,138 DEBUG Cleaned LaTeX string after restoring fractions: I_B = @@FRAC@@I_C\u03b2@@END_FRAC@@
-2024-10-14 00:23:27,138 DEBUG Original LaTeX string: V_B = V_E + V_{BE}
-2024-10-14 00:23:27,138 DEBUG Cleaned LaTeX string after restoring fractions: V_B = V_E + V_BE
-2024-10-14 00:23:27,138 DEBUG Original LaTeX string: P = F \cdot d
-2024-10-14 00:23:27,138 DEBUG Cleaned LaTeX string after restoring fractions: P = F · d
-2024-10-14 00:23:27,138 DEBUG Original LaTeX string: \alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega
-2024-10-14 00:23:27,139 DEBUG Cleaned LaTeX string after restoring fractions: \u03b1,   \u03b2,   \u03b3,   \u03b4,   \u03f5,   \u03d5,   \u03c9
-2024-10-14 00:23:27,139 DEBUG Original LaTeX string: \cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq
-2024-10-14 00:23:27,139 DEBUG Cleaned LaTeX string after restoring fractions: ·,   ×,   ÷,   ±,   \u2248,   \u221ax,   \u2264,   \u2265
-2024-10-14 00:23:27,139 DEBUG Original LaTeX string: Test=Yes2
-2024-10-14 00:23:27,139 DEBUG Cleaned LaTeX string after restoring fractions: Test=Yes2
-2024-10-14 00:23:27,140 DEBUG Final LaTeX/MathML results written to C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_output.txt
-2024-10-14 00:23:27,140 DEBUG Python script finished.
-2024-10-14 00:34:10,318 DEBUG Extracted LaTeX from Word document: 
-$V_E = I_E \cdot R_1$
-$V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$
-$V_C = V_{CC} - V_{RC}$
-$V_{CE} = V_C - V_E$
-$I_C = \frac{V_{RC}}{R_2}$
-$I_E = I_C + I_B$
-$I_B = \frac{I_C}{\beta}$
-$V_B = V_E + V_{BE}$
-$P = F \cdot d$
-$\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$
-$\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$
-$Test=Yes2$
+% **Summation with Exponents**
+$\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}$
+$E = \sum_{n=0}^{\infty} e^{-n}$
 
-2024-10-14 00:34:10,318 DEBUG Cleaned hidden characters from LaTeX input:  $V_E = I_E \cdot R_1$ $V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$ $V_C = V_{CC} - V_{RC}$ $V_{CE} = V_C - V_E$ $I_C = \frac{V_{RC}}{R_2}$ $I_E = I_C + I_B$ $I_B = \frac{I_C}{\beta}$ $V_B = V_E + V_{BE}$ $P = F \cdot d$ $\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$ $\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$ $Test=Yes2$ 
-2024-10-14 00:34:10,318 DEBUG Split equations: [' ', 'V_E = I_E \\cdot R_1', ' ', 'V_{RC} = I_C \\cdot R_2 = 9.77 \\, \\text{mA} \\cdot 470 \\, \\Omega \\approx 4.5 \\, \\text{V}', ' ', 'V_C = V_{CC} - V_{RC}', ' ', 'V_{CE} = V_C - V_E', ' ', 'I_C = \\frac{V_{RC}}{R_2}', ' ', 'I_E = I_C + I_B', ' ', 'I_B = \\frac{I_C}{\\beta}', ' ', 'V_B = V_E + V_{BE}', ' ', 'P = F \\cdot d', ' ', '\\alpha, \\, \\beta, \\, \\gamma, \\, \\delta, \\, \\epsilon, \\, \\phi, \\, \\omega', ' ', '\\cdot, \\, \\times, \\, \\div, \\, \\pm, \\, \\approx, \\, \\sqrt{x}, \\, \\leq, \\, \\geq', ' ', 'Test=Yes2', ' ']
-2024-10-14 00:34:10,318 DEBUG Original LaTeX string: V_E = I_E \cdot R_1
-2024-10-14 00:34:10,323 DEBUG Cleaned LaTeX string after restoring fractions: V_E = I_E · R_1
-2024-10-14 00:34:10,323 DEBUG Original LaTeX string: V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}
-2024-10-14 00:34:10,323 DEBUG Cleaned LaTeX string after restoring fractions: V_RC = I_C · R_2 = 9.77   mA · 470   \u03a9\u2248 4.5   V
-2024-10-14 00:34:10,323 DEBUG Original LaTeX string: V_C = V_{CC} - V_{RC}
-2024-10-14 00:34:10,324 DEBUG Cleaned LaTeX string after restoring fractions: V_C = V_CC - V_RC
-2024-10-14 00:34:10,324 DEBUG Original LaTeX string: V_{CE} = V_C - V_E
-2024-10-14 00:34:10,324 DEBUG Cleaned LaTeX string after restoring fractions: V_CE = V_C - V_E
-2024-10-14 00:34:10,324 DEBUG Original LaTeX string: I_C = \frac{V_{RC}}{R_2}
-2024-10-14 00:34:10,324 DEBUG Cleaned LaTeX string after restoring fractions: I_C = V_RC/R_2
-2024-10-14 00:34:10,324 DEBUG Original LaTeX string: I_E = I_C + I_B
-2024-10-14 00:34:10,324 DEBUG Cleaned LaTeX string after restoring fractions: I_E = I_C + I_B
-2024-10-14 00:34:10,324 DEBUG Original LaTeX string: I_B = \frac{I_C}{\beta}
-2024-10-14 00:34:10,325 DEBUG Cleaned LaTeX string after restoring fractions: I_B = I_C/\u03b2
-2024-10-14 00:34:10,325 DEBUG Original LaTeX string: V_B = V_E + V_{BE}
-2024-10-14 00:34:10,325 DEBUG Cleaned LaTeX string after restoring fractions: V_B = V_E + V_BE
-2024-10-14 00:34:10,325 DEBUG Original LaTeX string: P = F \cdot d
-2024-10-14 00:34:10,325 DEBUG Cleaned LaTeX string after restoring fractions: P = F · d
-2024-10-14 00:34:10,325 DEBUG Original LaTeX string: \alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega
-2024-10-14 00:34:10,326 DEBUG Cleaned LaTeX string after restoring fractions: \u03b1,   \u03b2,   \u03b3,   \u03b4,   \u03f5,   \u03d5,   \u03c9
-2024-10-14 00:34:10,326 DEBUG Original LaTeX string: \cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq
-2024-10-14 00:34:10,326 DEBUG Cleaned LaTeX string after restoring fractions: ·,   ×,   ÷,   ±,   \u2248,   \u221ax,   \u2264,   \u2265
-2024-10-14 00:34:10,326 DEBUG Original LaTeX string: Test=Yes2
-2024-10-14 00:34:10,326 DEBUG Cleaned LaTeX string after restoring fractions: Test=Yes2
-2024-10-14 00:34:10,327 DEBUG Final LaTeX/MathML results written to C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_output.txt
-2024-10-14 00:34:10,327 DEBUG Python script finished.
-2024-10-14 00:44:26,166 DEBUG Extracted LaTeX from Word document: 
-$V_E = I_E \cdot R_1$
-$V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$
-$V_C = V_{CC} - V_{RC}$
-$V_{CE} = V_C - V_E$
-$I_C = \frac{V_{RC}}{R_2}$
-$I_E = I_C + I_B$
-$I_B = \frac{I_C}{\beta}$
-$V_B = V_E + V_{BE}$
-$P = F \cdot d$
-$\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$
-$\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$
-$Test=Yes2$
+% **Exponential and Logarithmic Functions**
+$y = e^x \quad \text{and} \quad z = \log(x)$
 
-2024-10-14 00:44:26,166 DEBUG Cleaned hidden characters from LaTeX input:  $V_E = I_E \cdot R_1$ $V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$ $V_C = V_{CC} - V_{RC}$ $V_{CE} = V_C - V_E$ $I_C = \frac{V_{RC}}{R_2}$ $I_E = I_C + I_B$ $I_B = \frac{I_C}{\beta}$ $V_B = V_E + V_{BE}$ $P = F \cdot d$ $\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$ $\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$ $Test=Yes2$ 
-2024-10-14 00:44:26,167 DEBUG Split equations: [' ', 'V_E = I_E \\cdot R_1', ' ', 'V_{RC} = I_C \\cdot R_2 = 9.77 \\, \\text{mA} \\cdot 470 \\, \\Omega \\approx 4.5 \\, \\text{V}', ' ', 'V_C = V_{CC} - V_{RC}', ' ', 'V_{CE} = V_C - V_E', ' ', 'I_C = \\frac{V_{RC}}{R_2}', ' ', 'I_E = I_C + I_B', ' ', 'I_B = \\frac{I_C}{\\beta}', ' ', 'V_B = V_E + V_{BE}', ' ', 'P = F \\cdot d', ' ', '\\alpha, \\, \\beta, \\, \\gamma, \\, \\delta, \\, \\epsilon, \\, \\phi, \\, \\omega', ' ', '\\cdot, \\, \\times, \\, \\div, \\, \\pm, \\, \\approx, \\, \\sqrt{x}, \\, \\leq, \\, \\geq', ' ', 'Test=Yes2', ' ']
-2024-10-14 00:44:26,167 DEBUG Original LaTeX string: V_E = I_E \cdot R_1
-2024-10-14 00:44:26,171 DEBUG Cleaned LaTeX string after restoring fractions: V_E = I_E · R_1
-2024-10-14 00:44:26,171 DEBUG Original LaTeX string: V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}
-2024-10-14 00:44:26,171 DEBUG Cleaned LaTeX string after restoring fractions: V_RC = I_C · R_2 = 9.77   mA · 470   \u03a9\u2248 4.5   V
-2024-10-14 00:44:26,171 DEBUG Original LaTeX string: V_C = V_{CC} - V_{RC}
-2024-10-14 00:44:26,172 DEBUG Cleaned LaTeX string after restoring fractions: V_C = V_CC - V_RC
-2024-10-14 00:44:26,172 DEBUG Original LaTeX string: V_{CE} = V_C - V_E
-2024-10-14 00:44:26,172 DEBUG Cleaned LaTeX string after restoring fractions: V_CE = V_C - V_E
-2024-10-14 00:44:26,172 DEBUG Original LaTeX string: I_C = \frac{V_{RC}}{R_2}
-2024-10-14 00:44:26,173 DEBUG Cleaned LaTeX string after restoring fractions: I_C = V_RC/R_2
-2024-10-14 00:44:26,173 DEBUG Original LaTeX string: I_E = I_C + I_B
-2024-10-14 00:44:26,173 DEBUG Cleaned LaTeX string after restoring fractions: I_E = I_C + I_B
-2024-10-14 00:44:26,173 DEBUG Original LaTeX string: I_B = \frac{I_C}{\beta}
-2024-10-14 00:44:26,173 DEBUG Cleaned LaTeX string after restoring fractions: I_B = I_C/\u03b2
-2024-10-14 00:44:26,173 DEBUG Original LaTeX string: V_B = V_E + V_{BE}
-2024-10-14 00:44:26,173 DEBUG Cleaned LaTeX string after restoring fractions: V_B = V_E + V_BE
-2024-10-14 00:44:26,173 DEBUG Original LaTeX string: P = F \cdot d
-2024-10-14 00:44:26,174 DEBUG Cleaned LaTeX string after restoring fractions: P = F · d
-2024-10-14 00:44:26,174 DEBUG Original LaTeX string: \alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega
-2024-10-14 00:44:26,174 DEBUG Cleaned LaTeX string after restoring fractions: \u03b1,   \u03b2,   \u03b3,   \u03b4,   \u03f5,   \u03d5,   \u03c9
-2024-10-14 00:44:26,174 DEBUG Original LaTeX string: \cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq
-2024-10-14 00:44:26,175 DEBUG Cleaned LaTeX string after restoring fractions: ·,   ×,   ÷,   ±,   \u2248,   \u221ax,   \u2264,   \u2265
-2024-10-14 00:44:26,175 DEBUG Original LaTeX string: Test=Yes2
-2024-10-14 00:44:26,175 DEBUG Cleaned LaTeX string after restoring fractions: Test=Yes2
-2024-10-14 00:44:26,175 DEBUG Final LaTeX/MathML results written to C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_output.txt
-2024-10-14 00:44:26,175 DEBUG Python script finished.
-2024-10-14 00:49:34,613 DEBUG Extracted LaTeX from Word document: 
-$V_E = I_E \cdot R_1$
-$V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$
-$V_C = V_{CC} - V_{RC}$
-$V_{CE} = V_C - V_E$
-$I_C = \frac{V_{RC}}{R_2}$
-$I_E = I_C + I_B$
-$I_B = \frac{I_C}{\beta}$
-$V_B = V_E + V_{BE}$
-$P = F \cdot d$
-$\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$
-$\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$
-$Test=Yes2$
+% **Nested Exponents**
+$y = e^{x^2 + \frac{1}{x}}$
+$z = x^{x^{x}}$
 
-2024-10-14 00:49:34,613 DEBUG Cleaned hidden characters from LaTeX input:  $V_E = I_E \cdot R_1$ $V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$ $V_C = V_{CC} - V_{RC}$ $V_{CE} = V_C - V_E$ $I_C = \frac{V_{RC}}{R_2}$ $I_E = I_C + I_B$ $I_B = \frac{I_C}{\beta}$ $V_B = V_E + V_{BE}$ $P = F \cdot d$ $\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$ $\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$ $Test=Yes2$ 
-2024-10-14 00:49:34,613 DEBUG Split equations: [' ', 'V_E = I_E \\cdot R_1', ' ', 'V_{RC} = I_C \\cdot R_2 = 9.77 \\, \\text{mA} \\cdot 470 \\, \\Omega \\approx 4.5 \\, \\text{V}', ' ', 'V_C = V_{CC} - V_{RC}', ' ', 'V_{CE} = V_C - V_E', ' ', 'I_C = \\frac{V_{RC}}{R_2}', ' ', 'I_E = I_C + I_B', ' ', 'I_B = \\frac{I_C}{\\beta}', ' ', 'V_B = V_E + V_{BE}', ' ', 'P = F \\cdot d', ' ', '\\alpha, \\, \\beta, \\, \\gamma, \\, \\delta, \\, \\epsilon, \\, \\phi, \\, \\omega', ' ', '\\cdot, \\, \\times, \\, \\div, \\, \\pm, \\, \\approx, \\, \\sqrt{x}, \\, \\leq, \\, \\geq', ' ', 'Test=Yes2', ' ']
-2024-10-14 00:49:34,613 DEBUG Original LaTeX string: V_E = I_E \cdot R_1
-2024-10-14 00:49:34,617 DEBUG Cleaned LaTeX string after restoring fractions: V_E = I_E · R_1
-2024-10-14 00:49:34,617 DEBUG Original LaTeX string: V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}
-2024-10-14 00:49:34,617 DEBUG Cleaned LaTeX string after restoring fractions: V_RC = I_C · R_2 = 9.77   mA · 470   \u03a9\u2248 4.5   V
-2024-10-14 00:49:34,617 DEBUG Original LaTeX string: V_C = V_{CC} - V_{RC}
-2024-10-14 00:49:34,618 DEBUG Cleaned LaTeX string after restoring fractions: V_C = V_CC - V_RC
-2024-10-14 00:49:34,618 DEBUG Original LaTeX string: V_{CE} = V_C - V_E
-2024-10-14 00:49:34,618 DEBUG Cleaned LaTeX string after restoring fractions: V_CE = V_C - V_E
-2024-10-14 00:49:34,618 DEBUG Original LaTeX string: I_C = \frac{V_{RC}}{R_2}
-2024-10-14 00:49:34,618 DEBUG Cleaned LaTeX string after restoring fractions: I_C = V_RC/R_2
-2024-10-14 00:49:34,618 DEBUG Original LaTeX string: I_E = I_C + I_B
-2024-10-14 00:49:34,619 DEBUG Cleaned LaTeX string after restoring fractions: I_E = I_C + I_B
-2024-10-14 00:49:34,619 DEBUG Original LaTeX string: I_B = \frac{I_C}{\beta}
-2024-10-14 00:49:34,619 DEBUG Cleaned LaTeX string after restoring fractions: I_B = I_C/\u03b2
-2024-10-14 00:49:34,619 DEBUG Original LaTeX string: V_B = V_E + V_{BE}
-2024-10-14 00:49:34,619 DEBUG Cleaned LaTeX string after restoring fractions: V_B = V_E + V_BE
-2024-10-14 00:49:34,619 DEBUG Original LaTeX string: P = F \cdot d
-2024-10-14 00:49:34,619 DEBUG Cleaned LaTeX string after restoring fractions: P = F · d
-2024-10-14 00:49:34,619 DEBUG Original LaTeX string: \alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega
-2024-10-14 00:49:34,620 DEBUG Cleaned LaTeX string after restoring fractions: \u03b1,   \u03b2,   \u03b3,   \u03b4,   \u03f5,   \u03d5,   \u03c9
-2024-10-14 00:49:34,620 DEBUG Original LaTeX string: \cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq
-2024-10-14 00:49:34,620 DEBUG Cleaned LaTeX string after restoring fractions: ·,   ×,   ÷,   ±,   \u2248,   \u221ax,   \u2264,   \u2265
-2024-10-14 00:49:34,620 DEBUG Original LaTeX string: Test=Yes2
-2024-10-14 00:49:34,620 DEBUG Cleaned LaTeX string after restoring fractions: Test=Yes2
-2024-10-14 00:49:34,621 DEBUG Final LaTeX/MathML results written to C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_output.txt
-2024-10-14 00:49:34,621 DEBUG Python script finished.
+
+2024-10-17 00:13:20,032 DEBUG Cleaned hidden characters from LaTeX input: $V_E = I_E \cdot R_1$ $V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}$ $V_C = V_{CC} - V_{RC}$ $V_{CE} = V_C - V_E$ $I_C = \frac{V_{RC}}{R_2}$ $I_E = I_C + I_B$ $I_B = \frac{I_C}{\beta}$ $V_B = V_E + V_{BE}$ $P = F \cdot d$ $\alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega$ $\cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq$ $Test=Yes2$  % **Complex Nested Fractions** $I_N = \frac{\frac{V_{RC}}{R_2}}{\frac{V_E}{R_1}}$ $P_{out} = \frac{\frac{F \cdot d}{T}}{\frac{I_E}{t}}$  % **Integral Expressions** $\int_0^\infty x^2 \, dx$ $\int_a^b f(x) \, dx = F(b) - F(a)$ $A = \int_0^T v(t) \, dt$  % **Summation with Exponents** $\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}$ $E = \sum_{n=0}^{\infty} e^{-n}$  % **Exponential and Logarithmic Functions** $y = e^x \quad \text{and} \quad z = \log(x)$  % **Nested Exponents** $y = e^{x^2 + \frac{1}{x}}$ $z = x^{x^{x}}$  
+2024-10-17 00:13:20,032 DEBUG Split equations: ['', 'V_E = I_E \\cdot R_1', ' ', 'V_{RC} = I_C \\cdot R_2 = 9.77 \\, \\text{mA} \\cdot 470 \\, \\Omega \\approx 4.5 \\, \\text{V}', ' ', 'V_C = V_{CC} - V_{RC}', ' ', 'V_{CE} = V_C - V_E', ' ', 'I_C = \\frac{V_{RC}}{R_2}', ' ', 'I_E = I_C + I_B', ' ', 'I_B = \\frac{I_C}{\\beta}', ' ', 'V_B = V_E + V_{BE}', ' ', 'P = F \\cdot d', ' ', '\\alpha, \\, \\beta, \\, \\gamma, \\, \\delta, \\, \\epsilon, \\, \\phi, \\, \\omega', ' ', '\\cdot, \\, \\times, \\, \\div, \\, \\pm, \\, \\approx, \\, \\sqrt{x}, \\, \\leq, \\, \\geq', ' ', 'Test=Yes2', '  % **Complex Nested Fractions** ', 'I_N = \\frac{\\frac{V_{RC}}{R_2}}{\\frac{V_E}{R_1}}', ' ', 'P_{out} = \\frac{\\frac{F \\cdot d}{T}}{\\frac{I_E}{t}}', '  % **Integral Expressions** ', '\\int_0^\\infty x^2 \\, dx', ' ', '\\int_a^b f(x) \\, dx = F(b) - F(a)', ' ', 'A = \\int_0^T v(t) \\, dt', '  % **Summation with Exponents** ', '\\sum_{n=1}^{\\infty} \\frac{1}{n^2} = \\frac{\\pi^2}{6}', ' ', 'E = \\sum_{n=0}^{\\infty} e^{-n}', '  % **Exponential and Logarithmic Functions** ', 'y = e^x \\quad \\text{and} \\quad z = \\log(x)', '  % **Nested Exponents** ', 'y = e^{x^2 + \\frac{1}{x}}', ' ', 'z = x^{x^{x}}', '  ']
+2024-10-17 00:13:20,032 DEBUG Original LaTeX string: V_E = I_E \cdot R_1
+2024-10-17 00:13:20,037 DEBUG Cleaned LaTeX string after restoring fractions: V_E = I_E · R_1
+2024-10-17 00:13:20,037 DEBUG Original LaTeX string: V_{RC} = I_C \cdot R_2 = 9.77 \, \text{mA} \cdot 470 \, \Omega \approx 4.5 \, \text{V}
+2024-10-17 00:13:20,037 DEBUG Cleaned LaTeX string after restoring fractions: V_RC = I_C · R_2 = 9.77   mA · 470   \u03a9\u2248 4.5   V
+2024-10-17 00:13:20,038 DEBUG Original LaTeX string: V_C = V_{CC} - V_{RC}
+2024-10-17 00:13:20,038 DEBUG Cleaned LaTeX string after restoring fractions: V_C = V_CC - V_RC
+2024-10-17 00:13:20,038 DEBUG Original LaTeX string: V_{CE} = V_C - V_E
+2024-10-17 00:13:20,038 DEBUG Cleaned LaTeX string after restoring fractions: V_CE = V_C - V_E
+2024-10-17 00:13:20,038 DEBUG Original LaTeX string: I_C = \frac{V_{RC}}{R_2}
+2024-10-17 00:13:20,038 DEBUG Cleaned LaTeX string after restoring fractions: I_C = \fracV_RCR_2
+2024-10-17 00:13:20,038 DEBUG Original LaTeX string: I_E = I_C + I_B
+2024-10-17 00:13:20,039 DEBUG Cleaned LaTeX string after restoring fractions: I_E = I_C + I_B
+2024-10-17 00:13:20,039 DEBUG Original LaTeX string: I_B = \frac{I_C}{\beta}
+2024-10-17 00:13:20,039 DEBUG Cleaned LaTeX string after restoring fractions: I_B = \fracI_C\u03b2
+2024-10-17 00:13:20,039 DEBUG Original LaTeX string: V_B = V_E + V_{BE}
+2024-10-17 00:13:20,039 DEBUG Cleaned LaTeX string after restoring fractions: V_B = V_E + V_BE
+2024-10-17 00:13:20,039 DEBUG Original LaTeX string: P = F \cdot d
+2024-10-17 00:13:20,039 DEBUG Cleaned LaTeX string after restoring fractions: P = F · d
+2024-10-17 00:13:20,039 DEBUG Original LaTeX string: \alpha, \, \beta, \, \gamma, \, \delta, \, \epsilon, \, \phi, \, \omega
+2024-10-17 00:13:20,040 DEBUG Cleaned LaTeX string after restoring fractions: \u03b1,   \u03b2,   \u03b3,   \u03b4,   \u03f5,   \u03d5,   \u03c9
+2024-10-17 00:13:20,040 DEBUG Original LaTeX string: \cdot, \, \times, \, \div, \, \pm, \, \approx, \, \sqrt{x}, \, \leq, \, \geq
+2024-10-17 00:13:20,040 DEBUG Cleaned LaTeX string after restoring fractions: ·,   ×,   ÷,   ±,   \u2248,   \u221ax,   \u2264,   \u2265
+2024-10-17 00:13:20,040 DEBUG Original LaTeX string: Test=Yes2
+2024-10-17 00:13:20,041 DEBUG Cleaned LaTeX string after restoring fractions: Test=Yes2
+2024-10-17 00:13:20,041 DEBUG Original LaTeX string: % **Complex Nested Fractions**
+2024-10-17 00:13:20,041 DEBUG Cleaned LaTeX string after restoring fractions: 
+2024-10-17 00:13:20,041 DEBUG Original LaTeX string: I_N = \frac{\frac{V_{RC}}{R_2}}{\frac{V_E}{R_1}}
+2024-10-17 00:13:20,042 DEBUG Cleaned LaTeX string after restoring fractions: I_N = \fracV_RC/R_2\fracV_ER_1
+2024-10-17 00:13:20,042 DEBUG Original LaTeX string: P_{out} = \frac{\frac{F \cdot d}{T}}{\frac{I_E}{t}}
+2024-10-17 00:13:20,042 DEBUG Cleaned LaTeX string after restoring fractions: P_out = \fracF · d/T\fracI_Et
+2024-10-17 00:13:20,042 DEBUG Original LaTeX string: % **Integral Expressions**
+2024-10-17 00:13:20,043 DEBUG Cleaned LaTeX string after restoring fractions: 
+2024-10-17 00:13:20,043 DEBUG Original LaTeX string: \int_0^\infty x^2 \, dx
+2024-10-17 00:13:20,043 DEBUG Cleaned LaTeX string after restoring fractions: \u222b_0^\u221ex^2   dx
+2024-10-17 00:13:20,043 DEBUG Original LaTeX string: \int_a^b f(x) \, dx = F(b) - F(a)
+2024-10-17 00:13:20,043 DEBUG Cleaned LaTeX string after restoring fractions: \u222b_a^b f(x)   dx = F(b) - F(a)
+2024-10-17 00:13:20,043 DEBUG Original LaTeX string: A = \int_0^T v(t) \, dt
+2024-10-17 00:13:20,043 DEBUG Cleaned LaTeX string after restoring fractions: A = \u222b_0^T v(t)   dt
+2024-10-17 00:13:20,043 DEBUG Original LaTeX string: % **Summation with Exponents**
+2024-10-17 00:13:20,044 DEBUG Cleaned LaTeX string after restoring fractions: 
+2024-10-17 00:13:20,044 DEBUG Original LaTeX string: \sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
+2024-10-17 00:13:20,044 DEBUG Cleaned LaTeX string after restoring fractions: \u2211_n=1^\u221e \frac1n^2 = \frac\u03c0^26
+2024-10-17 00:13:20,044 DEBUG Original LaTeX string: E = \sum_{n=0}^{\infty} e^{-n}
+2024-10-17 00:13:20,044 DEBUG Cleaned LaTeX string after restoring fractions: E = \u2211_n=0^\u221e e^-n
+2024-10-17 00:13:20,044 DEBUG Original LaTeX string: % **Exponential and Logarithmic Functions**
+2024-10-17 00:13:20,045 DEBUG Cleaned LaTeX string after restoring fractions: 
+2024-10-17 00:13:20,045 DEBUG Original LaTeX string: y = e^x \quad \text{and} \quad z = \log(x)
+2024-10-17 00:13:20,045 DEBUG Cleaned LaTeX string after restoring fractions: y = e^x   and   z = log(x)
+2024-10-17 00:13:20,045 DEBUG Original LaTeX string: % **Nested Exponents**
+2024-10-17 00:13:20,045 DEBUG Cleaned LaTeX string after restoring fractions: 
+2024-10-17 00:13:20,045 DEBUG Original LaTeX string: y = e^{x^2 + \frac{1}{x}}
+2024-10-17 00:13:20,046 DEBUG Cleaned LaTeX string after restoring fractions: y = e^x^2 + \frac1x
+2024-10-17 00:13:20,046 DEBUG Original LaTeX string: z = x^{x^{x}}
+2024-10-17 00:13:20,046 DEBUG Cleaned LaTeX string after restoring fractions: z = x^x^x
+2024-10-17 00:13:20,046 DEBUG Final LaTeX/MathML results written to C:\\Users\\latou\\Desktop\\LatexToWordProject\\latex_output.txt
+2024-10-17 00:13:20,046 DEBUG Python script finished.
+2024-10-17 00:13:20,046 DEBUG Log file size exceeded. Trimming the log file.
