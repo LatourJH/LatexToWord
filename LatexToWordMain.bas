@@ -1,154 +1,242 @@
 Attribute VB_Name = "LatexToWordMain"
 Option Explicit
 
-Sub MainSequence()
+Private Const SCRIPT_FILE_NAME As String = "PythonToLatexMainFile.py"
+
+' Convert the currently selected LaTeX without changing formatting elsewhere in
+' the document. Select one equation, or several equations separated by lines,
+' before running this macro.
+Public Sub MainSequence()
     On Error GoTo ErrorHandler
-    
-    Debug.Print "=== VBA Macro Execution Started ==="
-    
-    ' === Step 1: Normalize Text ===
-    Debug.Print "Step 1: Starting text normalization."
-    Call NormalizeDocumentText
-    Debug.Print "Step 1 Complete: Document text normalized."
-    
-    ' === Step 2: Convert LaTeX Equations with Python (Pass Document Path) ===
-    Dim docPath As String
-    docPath = ActiveDocument.FullName
-    Debug.Print "Step 2: Converting LaTeX equations using Python."
-    Debug.Print "Document Path: " & docPath
-    Call ConvertLatexWithPython(docPath)
-    Debug.Print "Step 2 Complete: LaTeX equations sent to Python."
-    
-    ' === Step 3: Read and Insert Processed LaTeX/MathML ===
-    Dim outputBuffer As String
-    Debug.Print "Step 3: Reading Python output from output file."
-    outputBuffer = ReadPythonOutput() ' Read Python output from output file
-    If outputBuffer <> "" Then
-        Debug.Print "Step 3: Inserting processed LaTeX equations."
-        Call ReadAndInsertMathML(outputBuffer)
-        Debug.Print "Step 3 Complete: Processed LaTeX equations inserted."
-    Else
-        Debug.Print "Step 3 Failed: No LaTeX equations were returned from Python."
+
+    Dim selectedRange As Range
+    Set selectedRange = Selection.Range.Duplicate
+
+    If selectedRange.Start = selectedRange.End Then
+        MsgBox "Select the LaTeX equation text first, then run LatexToWord again.", _
+               vbInformation, "LatexToWord"
+        Exit Sub
     End If
-    
-    ' === Step 4: Apply Professional Format to all OMath objects ===
-    Debug.Print "Step 4: Converting all OMath objects to Professional format."
-    Call ConvertAllToProfessional
-    Debug.Print "Step 4 Complete: Converted all equations to Professional format."
-    
-    Debug.Print "=== VBA Macro Execution Completed ==="
+
+    Dim pythonScript As String
+    pythonScript = FindPythonScript()
+    If Len(pythonScript) = 0 Then Exit Sub
+
+    Dim tempBase As String
+    Dim inputFile As String
+    Dim outputFile As String
+    Dim logFile As String
+    tempBase = CreateTempBasePath()
+    inputFile = tempBase & "-input.txt"
+    outputFile = tempBase & "-output.txt"
+    logFile = tempBase & ".log"
+
+    WriteUtf8Text inputFile, selectedRange.Text
+
+    Dim exitCode As Long
+    exitCode = RunConverter(pythonScript, inputFile, outputFile, logFile)
+    If exitCode <> 0 Then
+        Err.Raise vbObjectError + 1000, "LatexToWord", _
+                  "Python could not convert the selected text. Diagnostic log: " & logFile
+    End If
+    If Not FileExists(outputFile) Then
+        Err.Raise vbObjectError + 1001, "LatexToWord", _
+                  "Python finished without creating an output file. Diagnostic log: " & logFile
+    End If
+
+    Dim outputBuffer As String
+    outputBuffer = ReadUtf8Text(outputFile)
+    If Len(Trim$(outputBuffer)) = 0 Then
+        Err.Raise vbObjectError + 1002, "LatexToWord", _
+                  "No equations were returned. Diagnostic log: " & logFile
+    End If
+
+    Dim undoStarted As Boolean
+    StartUndoRecord undoStarted
+
+    Dim convertedCount As Long
+    convertedCount = ReplaceSelectionWithEquations(selectedRange, outputBuffer)
+
+    EndUndoRecord undoStarted
+    CleanupFile inputFile
+    CleanupFile outputFile
+    CleanupFile logFile
+
+    MsgBox CStr(convertedCount) & " equation(s) converted.", vbInformation, "LatexToWord"
     Exit Sub
 
 ErrorHandler:
-    Debug.Print "Error occurred: " & Err.Description
-    MsgBox "An error occurred: " & Err.Description
+    Dim errorDescription As String
+    errorDescription = Err.Description
+    On Error Resume Next
+    EndUndoRecord undoStarted
+    CleanupFile inputFile
+    CleanupFile outputFile
+    On Error GoTo 0
+
+    MsgBox "LatexToWord could not complete the conversion." & vbCrLf & vbCrLf & _
+           errorDescription, vbExclamation, "LatexToWord"
 End Sub
 
-Sub NormalizeDocumentText()
-    Dim textRange As Range
-    Set textRange = ActiveDocument.Content
-    
-    Debug.Print "Normalizing document text."
-    
-    ' Clear any font formatting to make sure all text uses the default font
-    textRange.Font.Reset
-    textRange.ParagraphFormat.Reset
-End Sub
+Private Function FindPythonScript() As String
+    Dim folder As Variant
+    Dim candidate As String
 
-Sub ConvertLatexWithPython(ByVal docPath As String)
-    Dim pythonScript As String
-    Dim shellCommand As String
-    Dim wsh As Object
-    
-    ' Path to your Python script
-    pythonScript = "C:\Users\latou\Desktop\LatexToWordProject\PythonToLatexMainFile.py"
-    Debug.Print "Python Script Path: " & pythonScript
-    
-    ' Construct the shell command to pass document path
-    shellCommand = "python """ & pythonScript & """ """ & docPath & """"
-    Debug.Print "Shell Command: " & shellCommand
-    
-    ' Use WScript.Shell for better handling of shell commands
-    Set wsh = CreateObject("WScript.Shell")
-    Debug.Print "Executing Python script..."
-    wsh.Run shellCommand, 0, True ' Wait for the command to complete (3rd argument True)
-    Debug.Print "Python script execution completed."
-End Sub
+    For Each folder In Array(ActiveDocument.Path, ThisDocument.Path)
+        If Len(CStr(folder)) > 0 Then
+            candidate = CStr(folder) & Application.PathSeparator & SCRIPT_FILE_NAME
+            If FileExists(candidate) Then
+                FindPythonScript = candidate
+                Exit Function
+            End If
+        End If
+    Next folder
 
-Function ReadPythonOutput() As String
-    Dim fso As Object
-    Dim tempFile As String
-    Dim fileStream As Object
-    Dim pythonOutput As String
-    
-    ' Temp file where Python wrote the output
-    tempFile = "C:\Users\latou\Desktop\LatexToWordProject\latex_output.txt"
-    
-    ' Check if the file exists
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    If fso.FileExists(tempFile) Then
-        Debug.Print "Temp file found: " & tempFile
-        
-        ' Open the file and read its contents with UTF-8 encoding
-        With CreateObject("ADODB.Stream")
-            .Type = 2 ' Specify stream type as text
-            .Charset = "utf-8" ' Specify the encoding as UTF-8
-            .Open
-            .LoadFromFile tempFile
-            pythonOutput = .ReadText ' Read the text as UTF-8
-            .Close
-        End With
-        
-        Debug.Print "Python output read successfully."
-        Debug.Print "Python Output: " & pythonOutput
-        
-        ' Remove the temp file after reading
-        fso.DeleteFile tempFile
-        Debug.Print "Temp file deleted."
-    Else
-        Debug.Print "Temp file not found: " & tempFile
-        pythonOutput = "" ' No output from Python
-    End If
-    
-    ReadPythonOutput = pythonOutput
+    Dim picker As Object
+    Set picker = Application.FileDialog(3) ' msoFileDialogFilePicker
+    With picker
+        .Title = "Locate " & SCRIPT_FILE_NAME
+        .AllowMultiSelect = False
+        .Filters.Clear
+        .Filters.Add "Python files", "*.py"
+        If .Show = -1 Then FindPythonScript = .SelectedItems(1)
+    End With
 End Function
 
+Private Function RunConverter(ByVal pythonScript As String, _
+                              ByVal inputFile As String, _
+                              ByVal outputFile As String, _
+                              ByVal logFile As String) As Long
+    Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
 
-Sub ReadAndInsertMathML(ByVal outputBuffer As String)
-    Dim eqRange As Range
-    Set eqRange = ActiveDocument.Content
-    eqRange.Collapse Direction:=wdCollapseEnd
-    
-    ' Split the output into individual lines (one equation per line)
+    Dim projectFolder As String
+    projectFolder = fso.GetParentFolderName(pythonScript)
+
+    Dim virtualEnvPython As String
+    virtualEnvPython = projectFolder & "\.venv\Scripts\python.exe"
+
+    Dim pythonCommand As String
+    If FileExists(virtualEnvPython) Then
+        pythonCommand = QuoteArgument(virtualEnvPython)
+    Else
+        pythonCommand = "py -3"
+    End If
+
+    Dim shellCommand As String
+    shellCommand = pythonCommand & " " & QuoteArgument(pythonScript) & _
+                   " --text-file " & QuoteArgument(inputFile) & _
+                   " --output " & QuoteArgument(outputFile) & _
+                   " --log " & QuoteArgument(logFile) & _
+                   " --selection-only"
+
+    Dim shell As Object
+    Set shell = CreateObject("WScript.Shell")
+    RunConverter = shell.Run(shellCommand, 0, True)
+End Function
+
+Private Function ReplaceSelectionWithEquations(ByVal selectedRange As Range, _
+                                               ByVal outputBuffer As String) As Long
+    Dim normalizedOutput As String
+    normalizedOutput = Replace(outputBuffer, vbCrLf, vbLf)
+    normalizedOutput = Replace(normalizedOutput, vbCr, vbLf)
+
     Dim equations() As String
-    equations = Split(outputBuffer, vbCrLf) ' Split by line break
-    
-    Debug.Print "Inserting equations into the document."
-    Debug.Print "Number of equations: " & UBound(equations) + 1
-    
-    ' Insert each equation as an OMath object
+    equations = Split(normalizedOutput, vbLf)
+
+    ' Preserve a final paragraph mark if Word included it in the selection.
+    If selectedRange.End > selectedRange.Start Then
+        If Right$(selectedRange.Text, 1) = vbCr Then
+            selectedRange.MoveEnd Unit:=wdCharacter, Count:=-1
+        End If
+    End If
+
+    selectedRange.Text = ""
+    selectedRange.Collapse Direction:=wdCollapseStart
+
     Dim equation As Variant
+    Dim equationText As String
+    Dim mathRange As Range
+    Dim equationStart As Long
+    Dim count As Long
+
     For Each equation In equations
-        If Len(Trim(equation)) > 0 Then ' Skip empty lines
-            Debug.Print "Inserting equation: " & equation
-            eqRange.InsertAfter equation
-            eqRange.InsertParagraphAfter
-            
-            ' Convert inserted equation to OMath and build up
-            eqRange.OMaths.Add eqRange
-            eqRange.OMaths(1).BuildUp
-            eqRange.Collapse Direction:=wdCollapseEnd
+        equationText = Trim$(CStr(equation))
+        If Len(equationText) > 0 Then
+            If count > 0 Then
+                selectedRange.InsertParagraphAfter
+                selectedRange.Collapse Direction:=wdCollapseEnd
+            End If
+
+            equationStart = selectedRange.Start
+            selectedRange.InsertAfter equationText
+            Set mathRange = ActiveDocument.Range( _
+                Start:=equationStart, End:=equationStart + Len(equationText))
+            ActiveDocument.OMaths.Add mathRange
+            mathRange.OMaths(1).BuildUp
+            selectedRange.SetRange Start:=mathRange.End, End:=mathRange.End
+            count = count + 1
         End If
     Next equation
+
+    ReplaceSelectionWithEquations = count
+End Function
+
+Private Sub WriteUtf8Text(ByVal filePath As String, ByVal value As String)
+    With CreateObject("ADODB.Stream")
+        .Type = 2
+        .Charset = "utf-8"
+        .Open
+        .WriteText value
+        .SaveToFile filePath, 2
+        .Close
+    End With
 End Sub
 
-Sub ConvertAllToProfessional()
-    ' Convert all OMath objects in the document to Professional format
-    Dim omath As omath
-    Debug.Print "Converting all OMath objects to Professional format."
-    For Each omath In ActiveDocument.OMaths
-        ' Apply the professional format to the equation
-        omath.BuildUp
-    Next omath
+Private Function ReadUtf8Text(ByVal filePath As String) As String
+    With CreateObject("ADODB.Stream")
+        .Type = 2
+        .Charset = "utf-8"
+        .Open
+        .LoadFromFile filePath
+        ReadUtf8Text = .ReadText
+        .Close
+    End With
+End Function
+
+Private Function CreateTempBasePath() As String
+    Randomize
+    CreateTempBasePath = Environ$("TEMP") & Application.PathSeparator & _
+                         "latextoword-" & Format$(Now, "yyyymmdd-hhnnss") & _
+                         "-" & Format$(CLng(Rnd() * 1000000), "000000")
+End Function
+
+Private Function QuoteArgument(ByVal value As String) As String
+    QuoteArgument = Chr$(34) & Replace(value, Chr$(34), Chr$(34) & Chr$(34)) & Chr$(34)
+End Function
+
+Private Function FileExists(ByVal filePath As String) As Boolean
+    FileExists = (Len(Dir$(filePath, vbNormal Or vbHidden Or vbSystem)) > 0)
+End Function
+
+Private Sub CleanupFile(ByVal filePath As String)
+    If Len(filePath) = 0 Then Exit Sub
+    If FileExists(filePath) Then Kill filePath
 End Sub
 
+Private Sub StartUndoRecord(ByRef started As Boolean)
+    On Error Resume Next
+    Application.UndoRecord.StartCustomRecord "Convert LaTeX equations"
+    started = (Err.Number = 0)
+    Err.Clear
+    On Error GoTo 0
+End Sub
+
+Private Sub EndUndoRecord(ByRef started As Boolean)
+    If Not started Then Exit Sub
+    On Error Resume Next
+    Application.UndoRecord.EndCustomRecord
+    started = False
+    Err.Clear
+    On Error GoTo 0
+End Sub
